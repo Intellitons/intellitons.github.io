@@ -1,0 +1,14 @@
+Prompt_Type,From_Species,To_Species,Count,Mean_Target_Mode_Activation_Shift
+grounded_factual,I_1,I_1,96,1.5804804020811645
+grounded_factual,I_5,I_5,34,4.184265547343358
+grounded_factual,I_1,I_5,6,3.1940460637705854
+grounded_factual,I_5,I_1,4,1.763704868250576
+hallucination_prone,I_1,I_1,129,0.6354952008257218
+hallucination_prone,I_5,I_5,5,1.0358259629058195
+hallucination_prone,I_1,I_5,3,0.8881849958993344
+hallucination_prone,I_5,I_1,3,0.439652651622628
+stylistic_continuation,I_1,I_1,57,0.834412688696331
+stylistic_continuation,I_4,I_4,5,5.0526848077225015
+stylistic_continuation,I_3,I_3,3,7.015012886225914
+stylistic_continuation,I_1,I_4,3,4.239263879110152
+stylistic_continuation,I_1,I_3,2,5.921265118059749

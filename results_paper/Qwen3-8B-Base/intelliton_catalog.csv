@@ -1,0 +1,8 @@
+Name,Spin,Mass(pole),Mass(lat),Mass(bare),Mass(ren),Category,Momentum,Helicity,v_group,FP Layer,FP Type,gamma,Z,Layers,Amplitude,Active In
+I_0,1.74,0.1007,0.0044,-0.3425,-0.1836,medium,3.142,0.00,0.000,16,crossover,0.100,14.569,7-36,7908.4,"arithmetic, factual_recall, logical_reasoning"
+I_1,0.76,0.1129,0.0272,-0.3265,-0.1233,medium,1.885,0.21,0.005,17,crossover,0.901,21.088,19-36,307.0,logical_reasoning
+I_2,0.98,0.1186,0.0217,-0.3265,-0.1233,medium,1.885,0.27,0.005,17,crossover,0.901,21.088,19-36,299.9,arithmetic
+I_3,0.93,0.1117,0.0321,-0.3265,-0.1233,medium,1.885,0.21,0.005,17,crossover,0.901,21.088,22-36,258.2,syntactic_agreement
+I_4,0.86,0.1059,0.0333,-0.3265,-0.1233,medium,1.885,0.19,0.005,17,crossover,0.901,21.088,21-36,257.5,pronoun_tracking
+I_5,1.03,0.1089,0.0166,-0.3265,-0.1233,medium,1.885,0.22,0.005,17,crossover,0.901,21.088,21-36,246.5,factual_recall
+I_6,1.53,0.1159,0.0469,-0.2850,-0.1226,medium,3.142,1.29,0.000,13,crossover,1.150,19.393,15-36,159.3,arithmetic
