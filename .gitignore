@@ -6,3 +6,8 @@ __*
 *arxiv_paper.s*
 *arxiv_paper.o*
 cover_letter*
+docs/_site/
+docs/.jekyll-cache/
+docs/.jekyll-metadata
+docs/Gemfile.lock
+docs/vendor/

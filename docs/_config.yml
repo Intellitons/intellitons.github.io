@@ -1,0 +1,26 @@
+title: Intelliton Blog
+description: >-
+  Popular science articles about Intellitons — the quasi-particle-like collective
+  excitation modes discovered inside large language models.
+baseurl: "/Intelliton"
+url: "https://xiongzhp.github.io"
+
+theme: minima
+
+author:
+  name: Intelliton Project
+
+show_excerpts: true
+
+minima:
+  skin: classic
+
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+markdown: kramdown
+highlighter: rouge
+
+kramdown:
+  math_engine: mathjax
