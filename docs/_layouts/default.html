@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="{{ page.html_lang | default: site.lang | default: 'en' }}">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#07111d">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="{{ '/assets/icons/favicon.ico' | relative_url }}" sizes="any">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ '/assets/icons/favicon-32x32.png' | relative_url }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ '/assets/icons/favicon-16x16.png' | relative_url }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ '/assets/icons/apple-touch-icon.png' | relative_url }}">
+    <link rel="manifest" href="{{ '/site.webmanifest' | relative_url }}">
+    <link rel="stylesheet" href="{{ '/assets/css/site.css' | relative_url }}">
+    {% seo %}
+    {% feed_meta %}
+    <script defer src="{{ '/assets/js/lang-toggle.js' | relative_url }}"></script>
+  </head>
+  <body class="site-shell" data-page-title-en="{{ page.title | default: site.title | escape }}" data-page-title-zh="{{ page.title_zh | default: site.title_zh | default: page.title | escape }}">
+    <div class="site-backdrop"></div>
+    <header class="site-header">
+      <div class="site-header__inner">
+        <a class="site-brand" href="{{ '/' | relative_url }}" aria-label="{{ site.title }}">
+          <img class="site-brand__logo" src="{{ '/assets/icons/icon-192.png' | relative_url }}" alt="Intelliton logo" width="56" height="56">
+          <div class="site-brand__text">
+            <span class="site-brand__title" data-lang="en">{{ site.title }}</span>
+            <span class="site-brand__title" data-lang="zh">{{ site.title_zh | default: site.title }}</span>
+            <span class="site-brand__subtitle" data-lang="en">Quasi-particle stories inside large language models</span>
+            <span class="site-brand__subtitle" data-lang="zh">大语言模型内部准粒子结构的科普记录</span>
+          </div>
+        </a>
+        {% include lang-switcher.html %}
+      </div>
+    </header>
+
+    <main class="page-wrap" aria-label="Content">
+      {{ content }}
+    </main>
+
+    <footer class="site-footer">
+      <div class="site-footer__inner">
+        <p data-lang="en">Built for GitHub Pages with bilingual post switching and an icon set derived from the Intelliton logo.</p>
+        <p data-lang="zh">基于 GitHub Pages 构建，支持中英双语切换，并使用 Intelliton 标志生成整套图标。</p>
+        <a href="https://github.com/xiongzhp/Intelliton">GitHub Repository</a>
+      </div>
+    </footer>
+  </body>
+</html>

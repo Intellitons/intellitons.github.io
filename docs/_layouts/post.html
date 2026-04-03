@@ -1,0 +1,36 @@
+---
+layout: default
+---
+<article class="article-shell">
+  <header class="article-hero">
+    <p class="article-hero__meta" data-lang="en">Published on {{ page.date | date: "%B %-d, %Y" }}</p>
+    <p class="article-hero__meta" data-lang="zh">发布于 {{ page.date | date: "%Y-%m-%d" }}</p>
+    <h1 class="article-hero__title">
+      <span data-lang="en">{{ page.title }}</span>
+      <span data-lang="zh">{{ page.title_zh | default: page.title }}</span>
+    </h1>
+    {% if page.excerpt %}
+      <p class="article-hero__excerpt" data-lang="en">{{ page.excerpt }}</p>
+      <p class="article-hero__excerpt" data-lang="zh">{{ page.excerpt_zh | default: page.excerpt }}</p>
+    {% endif %}
+  </header>
+
+  <div class="article-content prose">
+    {{ content }}
+  </div>
+
+  <nav class="article-nav" aria-label="Post navigation">
+    {% if page.previous %}
+      <a class="article-nav__item" href="{{ page.previous.url | relative_url }}">
+        <span data-lang="en">Previous: {{ page.previous.title }}</span>
+        <span data-lang="zh">上一篇：{{ page.previous.title_zh | default: page.previous.title }}</span>
+      </a>
+    {% endif %}
+    {% if page.next %}
+      <a class="article-nav__item article-nav__item--next" href="{{ page.next.url | relative_url }}">
+        <span data-lang="en">Next: {{ page.next.title }}</span>
+        <span data-lang="zh">下一篇：{{ page.next.title_zh | default: page.next.title }}</span>
+      </a>
+    {% endif %}
+  </nav>
+</article>

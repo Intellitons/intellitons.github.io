@@ -1,0 +1,35 @@
+---
+layout: default
+---
+<section class="hero-card">
+  <div class="hero-card__body">
+    {{ content }}
+  </div>
+</section>
+
+<section class="posts-section">
+  <div class="section-heading">
+    <h2 data-lang="en">Latest Articles</h2>
+    <h2 data-lang="zh">最新文章</h2>
+    <p data-lang="en">Each article includes complete English and Chinese versions, and your preferred language is remembered locally.</p>
+    <p data-lang="zh">每篇文章都提供完整的中英文版本，页面会在本地记住你的语言偏好。</p>
+  </div>
+
+  <div class="post-grid">
+    {% for post in site.posts %}
+      <article class="post-card">
+        <p class="post-card__date">{{ post.date | date: "%Y-%m-%d" }}</p>
+        <h3 class="post-card__title">
+          <a href="{{ post.url | relative_url }}">
+            <span data-lang="en">{{ post.title }}</span>
+            <span data-lang="zh">{{ post.title_zh | default: post.title }}</span>
+          </a>
+        </h3>
+        <p class="post-card__excerpt" data-lang="en">{{ post.excerpt | strip_html | strip_newlines }}</p>
+        <p class="post-card__excerpt" data-lang="zh">{{ post.excerpt_zh | default: post.excerpt | strip_html | strip_newlines }}</p>
+        <a class="post-card__link" href="{{ post.url | relative_url }}" data-lang="en">Read article</a>
+        <a class="post-card__link" href="{{ post.url | relative_url }}" data-lang="zh">阅读文章</a>
+      </article>
+    {% endfor %}
+  </div>
+</section>

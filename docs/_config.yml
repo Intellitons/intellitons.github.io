@@ -1,9 +1,15 @@
 title: Intelliton Blog
+title_zh: Intelliton 博客
 description: >-
   Popular science articles about Intellitons — the quasi-particle-like collective
   excitation modes discovered inside large language models.
+description_zh: >-
+  面向大众的 Intelliton 科普博客，介绍大语言模型内部类似准粒子的集体激发模式。
 baseurl: "/Intelliton"
 url: "https://xiongzhp.github.io"
+lang: en
+logo: "/assets/icons/android-chrome-512x512.png"
+image: "/assets/icons/android-chrome-512x512.png"
 
 theme: minima
 
