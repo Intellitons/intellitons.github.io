@@ -15,6 +15,18 @@
     <link rel="stylesheet" href="{{ '/assets/css/site.css' | relative_url }}">
     {% seo %}
     {% feed_meta %}
+    <script>
+      window.MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']],
+          displayMath: [['$$', '$$'], ['\\[', '\\]']]
+        },
+        options: {
+          skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      };
+    </script>
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script defer src="{{ '/assets/js/lang-toggle.js' | relative_url }}"></script>
     <noscript><style>[data-lang="en"]{display:block}[data-lang="zh"]{display:none}</style></noscript>
   </head>
