@@ -29,12 +29,16 @@ metaphor.
 - The newest explainer focuses on tasks: why pronoun tracking, arithmetic, factual recall, logical
 	reasoning, and syntactic agreement light up different internal modes even though they all look
 	like simple next-token prediction from the outside.
+- The three research-direction posts connect the Intelliton framework to the Abliteration / ARA
+  jailbreaking technique demonstrated on Gemma 4 in April 2026, and propose how the Intelliton
+  species catalogue can serve as an alignment audit and steering instrument.
 
 ## How to use the site
 
 - Use the language toggle in the top-right corner to switch every article between English and Chinese.
 - Your preferred language is saved locally in the browser and reused on later visits.
-- The posts below are ordered as a short five-part series, but each article can also be read on its own.
+- The first five posts form a short introductory series; the three posts from 6 April onward form a
+  research-directions series on alignment and representation engineering.
 
 </div>
 
@@ -51,11 +55,13 @@ metaphor.
 - 第一篇先把核心想法讲清楚：这里不是说模型里有真实粒子，而是把残差流换到一套更熟悉的晶格场论坐标系里重新描述。
 - 第二篇专门教你“怎么看谱表”，把 `I_0` 到 `I_4`、动量、类自旋、质量、螺旋度这些词都翻译成人话。
 - 最新的一篇任务导读会解释：为什么代词跟踪、算术、事实回忆、逻辑推理和句法一致性，会点亮不同的内部模式。
+- 之后的三篇研究方向文章，把 Intelliton 框架与 2026 年 4 月 Gemma 4 越狱事件中展示的
+  Abliteration/ARA 技术联系起来，并提出如何把 Intelliton 物种目录用作对齐审计和引导工具。
 
 ## 使用方式
 
 - 右上角的语言切换按钮可以在整站范围内切换英文与中文。
 - 浏览器会在本地保存你的语言偏好，下次访问时自动沿用。
-- 下面的文章按五篇系列排列，但每篇也都可以单独阅读。
+- 前五篇构成入门系列，4 月 6 日起的三篇构成关于对齐与表征工程的研究方向系列。
 
 </div>
