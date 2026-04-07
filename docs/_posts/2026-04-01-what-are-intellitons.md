@@ -1,325 +1,322 @@
 ---
 layout: post
-title: "What Are Intellitons? The Hidden Quasi-Particles Inside Large Language Models"
-title_zh: "什么是 Intelliton？藏在大语言模型里的准粒子"
+title: "What Are Intellitons? A Friendly Guide to the Lattice-Field View"
+title_zh: "什么是 Intelliton？一篇看懂晶格场论视角的入门文"
 date: 2026-04-01
 categories: [introduction, theory]
 excerpt: >
-  Large language models are usually described as giant statistical machines. But what if there is a
-  richer, more structured story hiding inside them? This article introduces Intellitons — stable
-  collective excitation patterns inside transformer residual streams — and explains why the language
-  of physics may offer a surprisingly useful lens on AI internals.
+  Intellitons are not claims that language models literally contain particles. They are a practical
+  way to redescribe the residual stream using a lattice-field coordinate system that makes recurring
+  modes easier to see, compare, and talk about.
 excerpt_zh: >
-  大语言模型通常被描述成巨大的统计机器。但如果在这种说法背后，还隐藏着一个更丰富、
-  更有结构的内部故事呢？本文介绍 Intelliton：变换器残差流中的稳定集体激发模式，并说
-  明为什么物理学的语言可能为理解 AI 内部机制提供一个出人意料却很有用的视角。
+  Intelliton 不是说语言模型里真的有粒子，而是把残差流换到一套晶格场论式的坐标系里重新
+  描述，好让那些反复出现、能跨层传播的模式更容易被看见、比较和解释。
 ---
 
 <div data-lang="en" markdown="1">
 
-## A new way to look at large language models
+## Start with the least mysterious version
 
-When people talk about large language models (LLMs), the standard description goes something like
-this: the model reads text, compresses patterns from an enormous training corpus, and predicts the
-next token. That account is correct, but it is not always satisfying. It explains *what* these
-systems do, yet says very little about *how organised structure emerges inside them*.
+The Intelliton project is **not** claiming that a language model secretly contains real physical
+particles.
 
-The Intelliton project proposes a bold and visually intuitive alternative perspective. Inside the
-residual stream of a transformer, there may exist relatively stable collective excitation patterns
-that behave *somewhat like quasi-particles in physics*. This project gives those patterns a name:
-**Intellitons**.
+The core idea is simpler and more useful than that: take the transformer residual stream, write it
+in a coordinate system that physicists already know how to reason about, and ask whether stable,
+recurrent modes appear.
 
-This is the first article in a popular science series based on the code and experimental outputs in
-the [Intelliton repository](https://github.com/xiongzhp/Intelliton). Later articles will dive into
-specific models and findings. This first article focuses on the idea itself: what it means, where it
-comes from, and why it might be worth taking seriously.
+At one layer, the residual stream is just a matrix:
 
----
+- `T` rows for token positions
+- `D` columns for hidden channels
 
-## From electrons to phonons: a brief detour through physics
-
-To understand Intellitons, it helps to understand the concept of a **quasi-particle**.
-
-In condensed matter physics — the branch that studies solids, liquids, and materials — a
-quasi-particle is *not* a fundamental entity like an electron in the Standard Model. It is a
-**stable collective pattern** that emerges when many microscopic degrees of freedom act together.
-
-A classic example is the phonon. In a crystal, billions of atoms are jostling around. Tracking each
-atom individually is hopeless. But the crystal supports collective vibration waves, and those waves
-behave almost like free particles: they have a well-defined energy, momentum, and even a kind of
-mass. Physicists call these quantised vibrations *phonons*. They are not elementary particles, but
-they are real, useful, and predictable objects for describing the crystal's behaviour.
-
-Other examples abound:
-
-- **Magnons** — collective spin waves in magnetic materials
-- **Plasmons** — collective oscillations of electrons in a metal
-- **Polarons** — electrons dressed by the lattice distortions they cause
-
-The key insight is that a complicated substrate can support simple, emergent, trackable objects.
+You can think of it as a long row of sensors. Each token position has thousands of readings. The
+question is not whether any single neuron matters, but whether the whole pattern can be compressed
+into a small set of reusable modes.
 
 ---
 
-## The Intelliton idea
+## The sensor analogy
 
-The Intelliton project asks whether the same logic applies to a transformer neural network.
+Imagine a sentence with 20 token positions. At each position, instead of one reading, you have a
+vector with thousands of numbers. That is what one layer of the residual stream looks like.
 
-A transformer has a **residual stream** — a vector of hidden activations that flows through each
-layer and is progressively modified. At every layer, attention heads and feed-forward blocks add
-their contributions to this stream. The result, layer by layer, is a transformation of the
-information content.
+Now ask four very ordinary questions:
 
-The Intelliton idea treats this residual stream as a kind of **discrete field** living on a
-token-layer lattice:
+1. Along the token axis, is the pattern smooth or rapidly oscillating?
+2. Inside hidden channels, does it point mostly in one direction or is it a messy mixture?
+3. As layers get deeper, does the pattern survive or die out quickly?
+4. Does the pattern's internal structure stay tied to a preferred propagation direction?
 
-- the **token position** acts like a spatial coordinate,
-- the **layer index** acts like a depth or time-like direction,
-- the **hidden dimension** acts like an internal degree of freedom.
+Those four questions become the project's four main diagnostics:
 
-On top of this representation, the codebase in `src/` performs:
+- **Momentum** answers question 1.
+- **Spin-like complexity** answers question 2.
+- **Mass** answers question 3.
+- **Helicity proxy** answers question 4.
 
-1. **Fourier analysis** over token positions to identify dominant spatial frequencies (momenta),
-2. **Singular-value decomposition** over residual activations to find dominant collective modes,
-3. **Propagator-based mass extraction** to measure how hard a mode is to excite or sustain,
-4. **Lattice dispersion fitting** to characterise how modes propagate through the network's depth,
-5. **Helicity and spin-like diagnostics** to quantify the internal complexity of each mode.
-
-The resulting dominant modes are then catalogued as candidate **Intelliton species**.
-
-So the working definition used in this project is deliberately pragmatic:
-
-> **An Intelliton is a relatively stable, recurrent collective activation mode in the transformer
-> residual field, identifiable across layers and prompts, and describable by effective quantities
-> such as mass, momentum, spin-like complexity, helicity, and renormalisation behaviour.**
-
-That is a scientific modelling choice, not a philosophical claim that language models literally
-contain particles. Its value depends on whether it organises observations better than simpler
-alternatives.
+This is why the physics language is useful. It gives a compact way to talk about four different
+facets of the same hidden pattern.
 
 ---
 
-## Why borrow from physics?
+## A new coordinate system, not a new ontology
 
-At first glance, applying physics vocabulary to neural networks might seem like poetic
-over-reaching. But there are principled reasons to try.
+The project rewrites the residual stream in a very specific way:
 
-**Transformers are layered systems.** Information passes through many stages, each of which filters,
-amplifies, and reorganises the signal. That is structurally similar to the scale transformations
-studied in renormalisation group theory. It is natural to ask whether early layers are
-"ultraviolet-like" (fine-grained, high-frequency) while later layers are "infrared-like"
-(coarse-grained, smoothed out).
+- the **token axis** is treated like a one-dimensional lattice in space,
+- the **layer axis** is treated like discrete time,
+- the **hidden channels** are treated like internal degrees of freedom.
 
-**Many physical systems share mathematical structure with transformers.** Attention is equivalent to
-a certain kind of kernel smoothing. Residual connections resemble discretised differential equations.
-The embedding dimension is large and acts like an internal degree of freedom. These are not arbitrary
-metaphors — they are formal correspondences.
+That mapping is the whole point. It does not say that text is literally matter. It says that a
+familiar toolkit from lattice field theory can be borrowed to organise activation patterns.
 
-**Emergent simplicity is a real phenomenon.** Many complex systems support a small number of
-dominant modes that concentrate most of the action. Turbulent fluids, financial markets, and neural
-circuits all exhibit this. There is no a priori reason transformers should be different.
-
-**A vocabulary for comparison.** If transformers do support stable collective modes, those modes give
-us a language for comparing models: not just in terms of benchmark accuracy, but in terms of internal
-dynamical structure. Do different model families have different "particle spectra"? Does scaling
-change the mass and momentum of dominant modes? Does instruction tuning reshape the internal
-excitation landscape?
+In code, the main definitions live in `src/lattice_field.py`, and the overall orchestration sits in
+`src/intelliton_analyzer.py`.
 
 ---
 
-## What does an Intelliton look like?
+## What momentum means here
 
-Each Intelliton species in the catalogue is described by a set of effective quantities:
+Momentum in this project is just a Fourier description of how a mode varies across token positions.
 
-| Quantity | Physical analogy | What it measures in the LLM |
-|---|---|---|
-| **Mass (pole)** | Particle pole mass | Inverse persistence of the mode through layers |
-| **Mass (lattice)** | Lattice-regulated mass | Mass from dispersion relation on the token lattice |
-| **Momentum** | Spatial momentum | Dominant Fourier frequency across token positions |
-| **Spin-like score** | Helicity / spin | Complexity and internal structure of the mode |
-| **Amplitude** | Mode strength | How strongly the mode is activated |
-| **Fixed-point layer** | RG fixed point | Layer where the mode settles into stable behaviour |
-| **Fixed-point type** | UV / IR / crossover | Whether the mode remains dynamic or stabilises |
+- If the dominant momentum is near `k = 0`, the pattern is broad and smooth across the sequence.
+- If the dominant momentum is large, the pattern flips more sharply from one token to the next.
 
-These are not hand-crafted features. They are computed from data — from the actual activations of
-real language models on a set of benchmark prompts.
+An everyday analogy is an audio equalizer:
+
+- low frequency means slow, smooth variation,
+- high frequency means fast, jagged variation.
+
+So when a report says a mode is low-momentum, it is usually saying: this is a sequence-scale pattern,
+not a tiny local blip tied to one token.
 
 ---
 
-## Why the word "Intelliton"?
+## What spin-like complexity means here
 
-The name combines *intelligence* and the quasi-particle suffix *-on* (as in phonon, magnon, etc.).
-It signals that the object is:
+This is the term most likely to confuse readers, because it is **not** literal particle spin.
 
-- **emergent**, not elementary,
-- **collective**, not individual,
-- **trackable**, not just statistical,
-- **connected to intelligent behaviour**, not just to random noise.
+The project uses SVD to split a layer into dominant modes. In plain language, SVD asks:
 
-Whether Intellitons ultimately prove to be a lasting scientific concept or a useful stepping stone
-depends on whether the framework continues to yield testable, reproducible, and interpretable
-results.
+> Can this complicated activation matrix be explained mostly by one or two big patterns, or do we
+> need many equally important patterns?
+
+If one mode dominates, the internal structure is simple and concentrated. If energy is spread across
+many directions, the structure is more mixed and complex. The blog and code call that a spin-like
+quantity, but the safer mental model is simply **internal complexity**.
 
 ---
 
-## What comes next in this series
+## What mass means here
 
-The following articles go from the abstract to the concrete:
+Mass is the most intuitive part of the analogy.
 
-- **Article 2** takes you inside the model `Qwen3-4B-Base` and walks through its Intelliton
-  catalogue in detail — 6 species, their masses, momenta, fixed-point layers, and how they map onto
-  different reasoning tasks.
-- **Article 3** explores what happens when you scale from 4B to 8B parameters, and what instruction
-  tuning does to the internal excitation spectrum.
-- **Article 4** applies the Intelliton lens to one of the most pressing practical problems in LLM
-  research: hallucination. Can internal spectral instability predict when a model is about to
-  confabulate?
+The layer axis is treated like discrete time, and the analysis tracks whether a mode's strength
+fades quickly or persists through many layers.
 
-If the idea of quasi-particles inside language models intrigues you, stay with the series. The
-results are more structured — and more surprising — than you might expect.
+- a **light** mode survives for a long depth range,
+- a **heavy** mode dies out quickly.
+
+So mass in this framework is really a measure of **how easily a pattern propagates through the
+network**, not how much it weighs in any everyday sense.
+
+---
+
+## What helicity means here
+
+Helicity is also a proxy, not a literal high-energy-physics observable.
+
+The simplified question is: if a mode has a preferred direction on the token lattice, does its
+internal structure stay aligned with that direction across layers?
+
+If yes, the mode has a more stable directional signature. If not, the mode is being scrambled.
+
+This is useful because two modes can have similar amplitude but very different directional stability.
+
+---
+
+## Why this framing helps
+
+Once the residual stream is written this way, the project can ask practical questions that are hard
+to state cleanly in raw neuron space:
+
+- Which patterns are global versus local across the sequence?
+- Which patterns are internally simple versus heavily mixed?
+- Which patterns are shallow noise versus deep, persistent carriers?
+- Which patterns stay stable across prompts, tasks, and generation steps?
+
+That is the value of Intellitons. They are a compact language for recurring activation patterns.
+They are useful if they organise observations better than a giant pile of raw activations.
+
+---
+
+## The shortest correct summary
+
+If you want the plainest possible version, it is this:
+
+> Intellitons are recurring residual-stream modes described in a physics-inspired coordinate system.
+> DFT tells you how they vary across tokens, SVD tells you how internally concentrated they are,
+> propagator decay tells you how far they travel across layers, and helicity tells you whether their
+> internal structure keeps a stable directional signature.
+
+The next article makes that concrete by showing how to read a spectrum report and what `I_0` to
+`I_4` sound like in ordinary language.
+
+---
+
+## Continue reading
+
+- [How to Read `I_0` to `I_4`]({% post_url 2026-04-02-inside-qwen-intelliton-spectrum %})
+- [Why Different Prompts Light Up Different Intellitons]({% post_url 2026-04-05-why-different-prompts-light-up-different-intellitons %})
 
 </div>
 
 <div data-lang="zh" markdown="1">
 
-## 重新看待大语言模型的一种方式
+## 先从最不神秘的版本开始
 
-人们谈到大语言模型时，最常见的说法大致是：模型读取文本，从巨大的训练语料中压缩出
-统计模式，然后预测下一个 token。这个说法没有错，但往往不够令人满足。它说明了这些
-系统在做什么，却很少解释 *内部有组织的结构是如何涌现出来的*。
+Intelliton 项目**不是**在说语言模型里真的藏着物理粒子。
 
-Intelliton 项目提出了一个大胆而直观的替代视角：在变换器的残差流中，也许存在一些相对
-稳定的集体激发模式，它们的行为 *有点像物理中的准粒子*。项目给这种模式取了一个名字：
-**Intelliton**。
+更准确、更实用的说法是：把变换器的残差流换到一套物理学家已经很熟悉的坐标系里，再去看
+里面会不会出现稳定、反复出现、可以跨层追踪的模式。
 
-这是基于 [Intelliton 仓库](https://github.com/xiongzhp/Intelliton) 的代码和实验结果写成的
-第一篇科普文章。后续文章会进入具体模型和发现；这篇先聚焦概念本身：它到底意味着什么、
-从哪里来、又为什么值得认真对待。
+对某一层来说，残差流不过是一个矩阵：
 
----
+- 行数 `T` 表示 token 位置
+- 列数 `D` 表示 hidden channels
 
-## 从电子到声子：先绕道物理学一下
-
-要理解 Intelliton，先要理解 **准粒子** 这个概念。
-
-在凝聚态物理中，也就是研究固体、液体和材料的那一支物理学里，准粒子 *不是* 像标准模
-型里的电子那样的基本实体。它是很多微观自由度共同作用时涌现出来的 **稳定集体模式**。
-
-一个经典例子是声子。晶体里有数十亿个原子在不停振动，逐个追踪几乎不可能。但晶体支持
-集体振动波，而这些波的行为又几乎像自由粒子：它们有确定的能量、动量，甚至某种意义上
-的“质量”。物理学家把这种量子化的振动称作 *声子*。它们不是基本粒子，却是描述晶体行
-为时真实、好用、可预测的对象。
-
-类似的例子还有很多：
-
-- **磁振子**：磁性材料中的集体自旋波
-- **等离激元**：金属中电子的集体振荡
-- **极化子**：被晶格畸变“包裹”的电子
-
-关键洞见在于：复杂的底层基质，完全可能支撑起简单、涌现、可追踪的对象。
+你可以把它想成一排传感器。每个 token 位置上都有成千上万个读数。项目真正关心的，不是某
+一个神经元是否重要，而是整块信号能不能被少数几个可重复使用的主模式概括出来。
 
 ---
 
-## Intelliton 的基本想法
+## 最通俗的类比：一排传感器
 
-Intelliton 项目要问的是：类似的逻辑，能不能也用在变换器神经网络上？
+想象一句话有 20 个 token 位置。每个位置上不是一个数字，而是一整个上千维的读数向量。这
+就是某一层残差流的大致样子。
 
-变换器有一条 **残差流**，也就是贯穿各层的隐藏激活向量。每一层的注意力头和前馈模块都
-会对它做增量修改。于是，信息内容随着层数推进，不断发生结构化变换。
+现在问四个很朴素的问题：
 
-Intelliton 的想法是把这条残差流看成一个生活在 **token-layer lattice** 上的离散场：
+1. 沿着 token 轴，这个模式是平滑变化，还是快速振荡？
+2. 在 hidden channels 里，它更像单一方向，还是复杂混合？
+3. 随着层数加深，它能持续很久，还是很快消失？
+4. 它的内部结构，是否一直和某个传播方向绑定在一起？
 
-- **token 位置** 扮演空间坐标，
-- **层索引** 扮演深度或类时间方向，
-- **隐藏维度** 扮演内部自由度。
+这四个问题，正好对应项目里的四个主诊断量：
 
-在这个表示之上，`src/` 里的代码执行了以下分析：
+- **动量** 对应第 1 个问题
+- **类自旋复杂度** 对应第 2 个问题
+- **质量** 对应第 3 个问题
+- **螺旋度代理量** 对应第 4 个问题
 
-1. 对 token 方向做 **傅里叶分析**，识别主导的空间频率，也就是动量；
-2. 对残差激活做 **奇异值分解**，提取主导的集体模式；
-3. 用 **传播子质量提取** 来衡量某个模式有多难被激发、维持多久；
-4. 用 **格点色散关系拟合** 描述模式如何在网络深度方向上传播；
-5. 用 **helicity 和类自旋诊断** 衡量模式内部结构的复杂程度。
-
-最后，这些主导模式会被整理成候选的 **Intelliton 物种目录**。
-
-因此，这个项目里采用的工作定义是刻意务实的：
-
-> **Intelliton 是指变换器残差场中一种相对稳定、可重复出现的集体激活模式，能够跨层、
-> 跨提示词被识别，并用质量、动量、类自旋复杂度、helicity 以及重整化行为等有效量来描
-> 述。**
-
-这是一种科学建模选择，不是说语言模型字面上真的“包含粒子”。它是否有价值，取决于它
-能否比更简单的替代解释更好地组织观测结果。
+这就是为什么物理语言在这里有用。它把同一批隐藏模式的四个不同侧面，用一套紧凑的词汇串
+了起来。
 
 ---
 
-## 为什么要借用物理学语言？
+## 这是一套新坐标系，不是一套新本体论
 
-乍看之下，用物理词汇来描述神经网络似乎有些用力过猛。但认真看，会发现这并不是纯粹的
-诗意比喻，而是有相当原则性基础的尝试。
+项目把残差流这样重写：
 
-**变换器本身就是分层系统。** 信息依次穿过很多阶段，每一层都在过滤、放大、重组信号。
-这在结构上与重整化群理论研究的尺度变换很像。于是很自然会问：早层是否更像“紫外”
-（细粒度、高频），晚层是否更像“红外”（粗粒度、被平滑后的表示）？
+- **token 轴** 看成一维晶格上的空间
+- **layer 轴** 看成离散时间
+- **hidden channels** 看成内部自由度
 
-**很多物理系统与变换器共享数学结构。** 注意力可以看作一种核平滑；残差连接类似离散化
-微分方程；嵌入维度很高，可视为内部自由度。这些并不是随意拼贴的类比，而是正式的结构
-对应。
+重点就在这一步。它不是说文本真的变成了物质，而是说可以借用晶格场论里熟悉的工具，来整
+理模型内部的激活模式。
 
-**复杂系统里经常会涌现出简单的主导模式。** 湍流、金融市场、神经回路都常常能用少量主
-导模态概括大部分动力学。没有任何先验理由说明变换器一定不会这样。
-
-**它还能提供比较模型的新语言。** 如果变换器真的支持稳定的集体模式，我们就不必只用基
-准分数来比较模型，还可以比较其内部动力学结构。不同模型家族是否有不同的“粒子谱”？
-模型变大后，主导模式的质量和动量会不会改变？指令微调是否会重塑内部激发景观？
+在代码里，主要定义集中在 `src/lattice_field.py`，总流程由 `src/intelliton_analyzer.py`
+串起来。
 
 ---
 
-## 一个 Intelliton 长什么样？
+## 这里的“动量”到底是什么意思
 
-目录中的每个 Intelliton 物种，都用一组有效量来描述：
+在这个项目里，动量只是描述模式沿 token 位置如何变化的一种傅里叶坐标。
 
-| 量 | 物理类比 | 在 LLM 中的含义 |
-|---|---|---|
-| **质量（pole）** | 粒子极点质量 | 模式跨层持续性的倒数 |
-| **质量（lattice）** | 格点调节质量 | 从 token 格点色散关系得到的质量 |
-| **动量** | 空间动量 | token 方向上的主导傅里叶频率 |
-| **类自旋分数** | helicity / spin | 模式内部结构复杂度 |
-| **振幅** | 模式强度 | 模式被激活得有多强 |
-| **固定点层** | RG 固定点 | 模式开始稳定下来的层位置 |
-| **固定点类型** | UV / IR / crossover | 模式是持续动态、趋于稳定，还是仍在过渡 |
+- 如果主导动量接近 `k = 0`，说明这个模式在整个序列上比较平滑、比较全局。
+- 如果主导动量较大，说明它在相邻 token 之间切换更快、振荡更强。
 
-这些都不是人工手写的特征，而是从真实数据里算出来的：也就是语言模型在一组基准提示词
-上的实际激活。
+最容易懂的比喻是音频均衡器：
+
+- 低频意味着缓慢、平滑的变化
+- 高频意味着尖锐、快速的起伏
+
+所以当报告说某个模式是低动量，它通常不是在说“速度慢”，而是在说：这更像一个覆盖整段序
+列的大尺度模式，而不是绑在某个 token 上的小噪声。
 
 ---
 
-## 为什么叫 “Intelliton”？
+## 这里的“自旋”为什么其实是在看复杂度
 
-这个词把 *intelligence* 和准粒子常见后缀 *-on*（如 phonon、magnon）结合在了一起，意
-味着它是：
+这个词最容易让人误会，因为它**不是**粒子物理里的严格自旋。
 
-- **涌现的**，不是基本的；
-- **集体的**，不是单个神经元层面的；
-- **可追踪的**，不是纯粹统计噪声；
-- **与智能行为有关的**，而不是随机扰动。
+项目用 SVD 把某一层拆成若干个主模式。人话版的问题其实是：
 
-Intelliton 最终会不会成为一个长期有生命力的科学概念，取决于这个框架能否继续给出可检验、
-可复现、可解释的结果。
+> 这一层看起来很复杂，但它是不是主要由一两个大模式支配，还是说必须靠很多差不多重要的
+> 模式一起才能解释？
+
+如果一个模式特别突出，说明内部结构更集中、更简单。如果能量分散在许多方向上，说明内部
+结构更混合、更复杂。博客和代码把这个量借用物理语言叫成 spin-like，但更稳妥的理解就是
+**内部复杂度**。
 
 ---
 
-## 这一系列接下来会写什么
+## 这里的“质量”为什么就是跨层能活多久
 
-后续文章会从抽象概念走向具体结果：
+质量是整套类比里最直观的一步。
 
-- **第 2 篇** 进入 `Qwen3-4B-Base`，详细讲解它的 Intelliton 目录：6 个物种、它们的质量、
-  动量、固定点层，以及与不同推理任务的对应关系。
-- **第 3 篇** 讨论从 4B 扩展到 8B 会发生什么，以及指令微调如何改变内部激发谱。
-- **第 4 篇** 用 Intelliton 的视角看一个最实际的问题：幻觉。内部谱不稳定性是否能够预测
-  模型何时开始“编造”？
+项目把 layer 轴当成离散时间，然后看一个模式的强度会不会在更深的层里迅速衰减。
 
-如果“语言模型内部的准粒子”这个想法让你感兴趣，那就继续看下去。实际结果比直觉中更
-有结构，也更令人意外。
+- **轻模式** 能持续很多层
+- **重模式** 很快就消失
+
+所以这里的质量，实质上是在衡量一个模式**穿透网络深度的能力**，而不是日常意义上的“有多
+重”。
+
+---
+
+## 这里的“螺旋度”为什么只是方向性代理量
+
+螺旋度在这里也只是代理量，不是高能物理里那种严格可观测量。
+
+更简单的问法是：如果某个模式在 token 晶格上有偏好的传播方向，它的内部结构会不会在跨层
+传播时一直和这个方向绑在一起？
+
+如果会，说明这个模式的方向性签名更稳定。如果不会，说明它在层间被打散了。
+
+这很有用，因为两个模式即使振幅差不多，方向稳定性也可能完全不同。
+
+---
+
+## 为什么这套说法有帮助
+
+一旦把残差流写成这种形式，项目就能提出一些用原始神经元空间很难直接说清的问题：
+
+- 哪些模式是全局的，哪些更局部？
+- 哪些模式内部很集中，哪些高度混合？
+- 哪些模式只是浅层噪声，哪些能一路传到深层？
+- 哪些模式能跨提示词、跨任务、跨生成步骤保持稳定？
+
+Intelliton 的价值就在这里。它提供了一套压缩语言，去描述那些反复出现的激活模式。只要这套
+语言比一大堆原始激活更能组织观察结果，它就是有用的。
+
+---
+
+## 一句话总结这件事
+
+如果只保留最通俗也最准确的一句话，那就是：
+
+> Intelliton 是用物理启发坐标系描述出来的残差流重复模式。DFT 看它沿 token 怎么变化，SVD
+> 看它内部是否集中，传播子衰减看它能走多深，螺旋度看它的内部结构是否保留稳定的方向性。
+
+下一篇文章会把这件事落到更具体的谱表上，直接教你怎么看 `I_0` 到 `I_4`。
+
+---
+
+## 继续阅读
+
+- [怎么看 `I_0` 到 `I_4`]({% post_url 2026-04-02-inside-qwen-intelliton-spectrum %})
+- [为什么不同提示词会点亮不同 Intelliton 模式]({% post_url 2026-04-05-why-different-prompts-light-up-different-intellitons %})
 
 </div>
