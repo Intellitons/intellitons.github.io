@@ -201,6 +201,7 @@ residual stream.
 
 - [How to Read `I_0` to `I_4`]({% post_url 2026-04-02-inside-qwen-intelliton-spectrum %})
 - [Hallucination as Internal Instability]({% post_url 2026-04-04-intellitons-and-hallucination %})
+- [Refusal as an Intelliton]({% post_url 2026-04-06-refusal-as-intelliton %})
 
 </div>
 
@@ -378,5 +379,6 @@ Intelliton 框架的用处就在这里：它把任务类别变成了对内部计
 
 - [怎么看 `I_0` 到 `I_4`]({% post_url 2026-04-02-inside-qwen-intelliton-spectrum %})
 - [把幻觉理解为内部不稳定性]({% post_url 2026-04-04-intellitons-and-hallucination %})
+- [拒绝即 Intelliton]({% post_url 2026-04-06-refusal-as-intelliton %})
 
 </div>
