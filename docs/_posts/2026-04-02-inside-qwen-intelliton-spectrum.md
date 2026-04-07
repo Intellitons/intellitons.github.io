@@ -1,492 +1,366 @@
 ---
 layout: post
-title: "Inside Qwen3-4B-Base: Mapping a Language Model's Internal Particle Spectrum"
-title_zh: "走进 Qwen3-4B-Base：描绘语言模型的内部粒子谱"
+title: "How to Read `I_0` to `I_4`: A Human Guide to an Intelliton Spectrum"
+title_zh: "怎么看 `I_0` 到 `I_4`：一份 Intelliton 谱表的人话读法"
 date: 2026-04-02
-categories: [case-study, qwen]
+categories: [case-study, interpretation]
 excerpt: >
-  The clearest single demonstration of the Intelliton framework comes from Qwen3-4B-Base. This
-  article walks through its complete Intelliton catalogue — 6 species with masses, momenta,
-  fixed-point layers, and distinct task affinities — and explains what each finding means in plain
-  language.
+  Spectrum tables can look intimidating. This article translates a representative Intelliton report
+  into ordinary language and explains what `I_0` to `I_4` are doing without over-reading the physics
+  metaphor.
 excerpt_zh: >
-  Intelliton 框架最清晰的一次单模型展示来自 Qwen3-4B-Base。本文按图索骥地走完整个
-  Intelliton 目录：6 个物种、各自的质量、动量、固定点层与任务偏好，并用尽量直白的语言
-  解释这些结果意味着什么。
+  Intelliton 谱表很容易把人吓住。本文把一份代表性的分析报告翻译成人话，解释 `I_0` 到
+  `I_4` 分别像什么，以及动量、类自旋、质量、螺旋度这些词到底该怎么读。
 ---
 
 <div data-lang="en" markdown="1">
 
-## The clearest window into Intelliton structure
+## Read the report with the right mental model first
 
-Among the five models analysed in the Intelliton project, `Qwen3-4B-Base` provides the cleanest
-and most interpretable results. It is a 4-billion-parameter base language model from the Qwen3
-family — no instruction tuning, no alignment — which means its internal structure reflects the
-organisation learned purely from unsupervised pretraining.
+The safest way to read an Intelliton spectrum is this:
 
-This article walks through every major finding for this model: the particle catalogue, momentum
-structure, renormalisation group flow, and generation-time dynamics. By the end, you will have a
-concrete picture of what an Intelliton catalogue looks like in practice.
+- the species labels `I_0`, `I_1`, `I_2`, and so on are **recurring modes**, not literal particles,
+- the physics vocabulary is a compact description of behaviour, not a claim of hidden quantum matter,
+- what matters most is the **role** of a mode, not its dramatic name.
 
----
+In the report discussed here, the main modes are broad sequence-scale patterns rather than tiny
+token-local ripples. Their masses are relatively light, which means they persist through many
+layers, and their helicity proxy is fairly stable, which means their directional signature is not
+being completely scrambled as the network gets deeper.
 
-## The pipeline: how the catalogue is built
-
-The analysis begins with the model's **residual stream** — the hidden activation vector that flows
-through every layer. For a set of diverse benchmark prompts (covering arithmetic, factual recall,
-logical reasoning, pronoun tracking, and syntactic agreement), the code:
-
-1. **Captures residual activations** at every layer for every token.
-2. **Treats the activation array as a discrete field** on a token-layer lattice.
-3. **Performs Fourier analysis** across token positions to extract dominant spatial modes (momenta).
-4. **Applies singular-value decomposition (SVD)** layer by layer to find dominant collective modes.
-5. **Fits a propagator** along the layer direction to extract an effective mass for each mode.
-6. **Runs EFT / RG analysis** to identify fixed-point layers and classify modes as UV, IR, or
-   crossover.
-7. **Merges similar modes** across prompts to build the final species catalogue.
-
-The result is a compact table — the Intelliton catalogue — that describes the model's dominant
-internal structure with far fewer numbers than the billions of raw parameters.
-
-![Qwen3-4B-Base particle table]({{ "/assets/images/Qwen3-4B-Base/particle_table.png" | relative_url }})
-*The Intelliton catalogue for Qwen3-4B-Base. Six species, each with mass, momentum, spin-like score,
-amplitude, fixed-point layer, and task affinities.*
+That already gives a useful picture: these are not one-off flashes. They are reusable internal
+carriers.
 
 ---
 
-## Six species, not hundreds
+## Before the species list, decode the four columns
 
-One of the most striking findings is how compact the catalogue is. Under this analysis pipeline,
-`Qwen3-4B-Base` resolves into just **6 dominant species**: `I_0` through `I_5`.
+If a spectrum table feels abstract, reduce it to four plain questions.
 
-This does not mean the model is simple. It has 4 billion parameters and a rich activation space.
-But it does mean that most of the systematic, recurrent collective behaviour is concentrated in a
-small number of dominant modes — much like how a complex plasma can be described mostly by its
-dominant plasmon modes.
+### Momentum
 
-### The leading species: `I_0`
+Momentum asks whether the pattern is smooth across token positions or rapidly oscillating.
 
-The dominant species is `I_0`, by a large margin:
+- low momentum means a broad, global sequence pattern,
+- high momentum means sharper token-to-token variation.
 
-| Property | Value |
-|---|---|
-| Amplitude | **6167.1** |
-| Spin-like score | **1.84** |
-| Pole mass | **0.1275** |
-| Lattice mass | **0.0083** |
-| Momentum | **π ≈ 3.14** |
-| Fixed-point layer | **16** |
-| Fixed-point type | **crossover** |
-| Active tasks | arithmetic, factual recall, logical reasoning |
+In the report discussed here, the important species sit close to the low-momentum end, so the best
+mental image is not a tiny local feature but a large-scale background shape spread across the
+sequence.
 
-The amplitude of `I_0` is about 30x larger than any other species. That makes it the dominant
-**backbone mode** of the model.
+### Spin-like score
 
-What does each property tell us?
+This is not literal spin. It is better read as **internal complexity**.
 
-**The amplitude (6167.1)** means this mode is strongly activated. When the model processes a prompt,
-`I_0` is by far the most energetically prominent collective excitation.
+- low spin-like score means one dominant internal direction stands out,
+- high spin-like score means several comparable directions are mixed together.
 
-**The spin-like score (1.84)** measures internal complexity. A value near 1 indicates a relatively
-simple, coherent mode; higher values indicate a richer internal structure. `I_0` sits at a moderate
-level — strong but not overly complex.
+### Mass
 
-**The pole mass (0.1275)** indicates how hard the mode is to sustain through the layers. A lower
-mass means the mode propagates more freely. `I_0` is relatively light, consistent with it being a
-broadly present, persistent background excitation.
+Mass tells you how fast a mode fades with depth.
 
-**The momentum at π** is perhaps the most surprising property. In the Fourier decomposition over
-token positions, `I_0` peaks at the highest frequency (k ≈ π). This means it alternates strongly
-between adjacent tokens — a globally "checker-board" pattern across the sequence. We return to
-this below.
+- light modes survive many layers,
+- heavy modes disappear quickly.
 
-**The fixed-point layer (16) and type (crossover)** mean that `I_0` has not settled into a stable
-infrared regime by the end of the network. It is still dynamically transitioning — remaining active
-and structured all the way through.
+So when the report says the species are light, it is really saying they are not shallow noise. They
+are able to propagate through the stack.
 
-### The secondary species: `I_1` through `I_5`
+### Helicity proxy
 
-The remaining five species are much weaker in amplitude, but they are more specialised. Here is a
-summary:
+Helicity here means a simplified combination of propagation direction and internal orientation.
 
-| Species | Top task | Momentum | Fixed-point type | Amplitude |
-|---|---|---|---|---|
-| `I_1` | logical reasoning | ~0 | IR | 204.3 |
-| `I_2` | arithmetic | ~0 | IR | 196.1 |
-| `I_3` | syntactic agreement | ~0 | IR | 188.5 |
-| `I_4` | pronoun tracking | ~0 | IR | 178.2 |
-| `I_5` | factual recall | ~0 | IR | 165.4 |
-
-Several things stand out. First, each secondary species is most strongly associated with a
-**different reasoning task**. This is not a hand-labelled taxonomy. The task affinities emerge
-automatically from which prompts most strongly activate each mode. The fact that there is a rough
-one-to-one mapping between species and task type is a structurally appealing result.
-
-Second, all secondary species peak at **momentum near zero**. In the token-position Fourier
-decomposition, k ≈ 0 corresponds to a slowly varying, globally present mode — the opposite of the
-backbone mode `I_0` that alternates at k ≈ π.
-
-Third, all secondary species are labelled **IR** (infrared), meaning they have settled into stable,
-slow-varying configurations by the later layers. This contrasts with `I_0`, which remains in a
-crossover regime.
+- stable helicity means the mode keeps a recognisable directional signature,
+- unstable helicity means that signature is getting mixed away.
 
 ---
 
-## The split momentum structure
+## `I_0`: the default continuation backbone
 
-The coexistence of `I_0` at high momentum (k ≈ π) and `I_1`-`I_5` at low momentum (k ≈ 0) is one
-of the most interesting structural features in the dataset.
+`I_0` is the easiest species to explain because it is both the strongest and the simplest.
 
-In the token-lattice picture:
+In the report, it has the largest amplitude and the lowest spin-like complexity among the leading
+species. The plain-language reading is:
 
-- **k ≈ 0 modes** are slowly varying across token positions. They represent structure that is
-  relatively uniform and global across the input sequence.
-- **k ≈ π modes** are maximally alternating — a kind of "anti-ferromagnetic" pattern where
-  adjacent tokens have opposite phase contributions.
+> `I_0` behaves like a strong background mode that helps the model keep a sentence moving toward a
+> plausible answer.
 
-So the model appears to maintain *two qualitatively different types* of collective excitation
-simultaneously:
+It is less like a specific fact and more like a **general continuation scaffold**. When the prompt
+is something like "If all dogs are animals..." or "What is 7 + 8?", `I_0` looks like the broad mode
+that helps open and stabilise the answer slot.
 
-1. A very strong alternating backbone mode that covers the entire sequence.
-2. A set of weaker but more semantically localised modes that are task-sensitive.
-
-Whether this split reflects something deep about how transformers organise information across token
-positions remains an open question. But it is a reproducible finding in this dataset.
-
-![Qwen3-4B-Base momentum and helicity]({{ "/assets/images/Qwen3-4B-Base/momentum_helicity_(pronoun_tracking).png" | relative_url }})
-*Momentum and helicity structure for Qwen3-4B-Base on pronoun-tracking prompts.*
+If you want a slogan, `I_0` is the model's "keep the computation on the rails" mode.
 
 ---
 
-## The RG picture: where the model "settles"
+## `I_1`: the quiet structural support
 
-The renormalisation group (RG) analysis treats the model's layers as a scale transformation. Early
-layers are treated as "ultraviolet" (fine-grained, high-frequency), while later layers are
-"infrared" (coarse-grained, settled).
+`I_1` is best read as a support mode rather than a flashy decision-maker.
 
-For `Qwen3-4B-Base`, most of the secondary species (`I_1` to `I_5`) reach their fixed points
-around layer **13**, while `I_0` has its fixed point at layer **16**.
+In intervention-style reading, changing `I_1` often produces smaller visible output shifts than
+changing the stronger causal modes. That does **not** mean it is useless. It usually means it is
+too infrastructural to show up as an obvious word swap.
 
-In ordinary neural-network terms, one would say: the model gradually settles into stable
-higher-level representations in the middle-to-late part of the stack. The secondary, specialised
-modes organise themselves a little earlier; the dominant backbone mode stays active and transitional
-for longer.
+The plain-language reading is:
 
-The EFT / RG figures below show the running mass (how each mode's effective "weight" changes with
-layer), the beta function (the rate of change), and the phase diagram of transitions.
+> `I_1` looks like a structural support mode that helps maintain the shape and stability of the
+> representation while other modes do more task-specific work.
 
-![Qwen3-4B-Base RG flow]({{ "/assets/images/Qwen3-4B-Base/rg_flow.png" | relative_url }})
-*RG flow for Qwen3-4B-Base, showing how each Intelliton species evolves across the network's depth.*
-
-![Qwen3-4B-Base EFT parameters]({{ "/assets/images/Qwen3-4B-Base/eft_parameters.png" | relative_url }})
-*Effective field theory parameters extracted for Qwen3-4B-Base.*
+Think of it as scaffolding rather than the headline feature.
 
 ---
 
-## All species are "medium mass"
+## `I_2`: a reference-resolution mode with a person-like bias
 
-A curious feature of the catalogue is that **all six species are classified as medium mass**. None
-are extremely light (easy to sustain) or extremely heavy (quickly decaying).
+The most intuitive reading of `I_2` comes from pronoun-style prompts such as:
 
-This suggests that the dominant collective modes in `Qwen3-4B-Base` occupy a relatively narrow
-dynamical band. They are stable enough to recur across layers and prompts, but flexible enough to
-participate in diverse tasks. The model appears to be organised around a set of moderately robust
-excitations rather than a rigid, frozen structure.
+> "Alice gave Bob a book. He thanked her for ..."
 
-![Qwen3-4B-Base mass spectrum]({{ "/assets/images/Qwen3-4B-Base/mass_spectrum_(pronoun_tracking).png" | relative_url }})
-*Mass spectrum for Qwen3-4B-Base on pronoun-tracking prompts.*
+In the report, amplifying `I_2` nudges the output toward a more person-centered, masculine pronoun
+interpretation. That makes `I_2` feel less like a generic language mode and more like a **reference
+selection channel**.
 
----
+The plain-language reading is:
 
-## Dispersion relation: how modes propagate
+> `I_2` appears to help the model decide which person-like entity the sentence is currently tracking.
 
-The dispersion relation describes how the energy (or effective frequency) of a mode depends on its
-momentum. In a free field theory, this is a simple parabola; in more complex systems, it can take a
-variety of shapes.
-
-For `Qwen3-4B-Base`, the dispersion relation shows the characteristic behaviour of modes on a
-discrete lattice, with the dominant mode following a distinctive curve that confirms its high-momentum
-nature.
-
-![Qwen3-4B-Base dispersion relation]({{ "/assets/images/Qwen3-4B-Base/dispersion_relation.png" | relative_url }})
-*Lattice dispersion relation for Qwen3-4B-Base.*
+That does not make it a literal "male pronoun particle." It means that, in this probe, the mode is
+consistently involved when the model has to collapse a messy discourse context into one concrete
+referent.
 
 ---
 
-## Spin spectrum: internal complexity across tasks
+## `I_3`: a higher-complexity mixing mode
 
-The spin-like score measures the internal complexity of each mode — how structured its internal
-degrees of freedom are. Across different task types, the spin spectrum reveals which tasks demand
-more internally complex excitations.
+`I_3` looks less like a single-purpose button and more like a mixed coordination mode.
 
-For pronoun-tracking prompts, the spin spectrum of `Qwen3-4B-Base` shows a clear peak at `I_0`
-with a moderate spin-like score, consistent with the backbone mode maintaining a moderately structured
-internal configuration.
+Its spin-like complexity is higher, which suggests that it is built from several comparably relevant
+internal directions rather than one clean axis. That usually happens in prompts where the model must
+hold multiple constraints in mind at once.
 
-![Qwen3-4B-Base spin spectrum]({{ "/assets/images/Qwen3-4B-Base/spin_spectrum_(pronoun_tracking).png" | relative_url }})
-*Spin-like score spectrum for Qwen3-4B-Base on pronoun-tracking prompts.*
+The plain-language reading is:
 
----
+> `I_3` behaves like a mode for combining several partial constraints into one workable internal
+> state.
 
-## Phase transitions: reorganisation points in the network
-
-The phase transition analysis identifies layers where the activation structure undergoes a
-qualitative change — a point where the effective degrees of freedom reorganise.
-
-For `Qwen3-4B-Base`, the transition map confirms that the major reorganisation occurs in the
-mid-to-late layers (around layer 13-16), consistent with the RG fixed-point analysis.
-
-![Qwen3-4B-Base phase transitions]({{ "/assets/images/Qwen3-4B-Base/phase_transitions.png" | relative_url }})
-*Phase transition diagram for Qwen3-4B-Base.*
+So rather than deciding one token directly, `I_3` is better imagined as part of the middle-layer
+machinery that keeps complex reasoning or structured sentence interpretation coherent.
 
 ---
 
-## What the catalogue means in plain language
+## `I_4`: a complementary reference mode
 
-Putting it all together, the `Qwen3-4B-Base` Intelliton catalogue tells a coherent story:
+`I_4` looks related to `I_2`, but with a different directional bias in pronoun-style settings.
 
-1. The model maintains a very strong, globally alternating backbone excitation (`I_0`) that is active
-   across virtually all task types.
-2. On top of that backbone, the model runs a set of five weaker, more task-specific modes that
-   correspond loosely to different types of reasoning.
-3. The task-specific modes organise themselves first (around layer 13), while the backbone mode
-   remains active and transitional until later (around layer 16).
-4. All modes are "medium mass" — stable but not rigid.
-5. The dominant mode alternates at high frequency across token positions; the task-specific modes are
-   more globally uniform.
+In the report, amplifying `I_4` can nudge outputs toward forms like "her" rather than a neutral or
+object-like continuation. The plain-language reading is:
 
-This is a surprisingly structured picture for a system with 4 billion parameters. The next article
-will show how this structure changes when the model is scaled up to 8B parameters or subjected to
-instruction tuning.
+> `I_4` is another reference-sensitive mode, complementary to `I_2`, and appears when the model has
+> to settle on a different discourse framing of who is being talked about.
+
+This is useful because it shows that "pronoun tracking" is not a single monolithic skill. The model
+can separate that work into several nearby but distinct modes.
 
 ---
 
-## Further reading
+## What the whole spectrum says in one paragraph
 
-- Continue to [Article 3: Scaling and Alignment Through the Intelliton Lens]({% post_url 2026-04-03-scaling-alignment-intellitons %})
-- Continue to [Article 4: Hallucination as Internal Instability]({% post_url 2026-04-04-intellitons-and-hallucination %})
+Taken together, `I_0` to `I_4` tell a coherent story.
+
+- `I_0` is a strong general backbone.
+- `I_1` helps keep the internal state stable.
+- `I_2` and `I_4` are more obviously tied to reference selection.
+- `I_3` looks like a higher-complexity mixing mode.
+
+That is why the Intelliton view can be useful. It turns a huge hidden state into a cast of recurring
+roles.
+
+---
+
+## What not to over-interpret
+
+There are two important cautions.
+
+1. Species indices are bookkeeping labels. `I_2` in one run is not guaranteed to mean exactly the
+   same thing in every future run.
+2. Terms like momentum, spin, and helicity are proxies. They organise evidence, but they are not
+   proof that the network literally contains particle-like objects.
+
+The disciplined reading is: these labels help summarise recurrent activation roles.
+
+---
+
+## Continue reading
+
+- [Why Different Prompts Light Up Different Intellitons]({% post_url 2026-04-05-why-different-prompts-light-up-different-intellitons %})
+- [Scaling and Alignment Through the Intelliton Lens]({% post_url 2026-04-03-scaling-alignment-intellitons %})
 
 </div>
 
 <div data-lang="zh" markdown="1">
 
-## 最清晰的一扇窗口：看见 Intelliton 结构
+## 先用对心智模型，再看谱表
 
-在 Intelliton 项目分析的五个模型里，`Qwen3-4B-Base` 给出了最干净、也最容易解释的结果。
-它是 Qwen3 家族的一个 40 亿参数基础模型，没有经过指令微调，也没有对齐处理，因此它的
-内部结构更接近无监督预训练自然形成的组织方式。
+读 Intelliton 谱表时，最稳妥的起点是这三句话：
 
-这篇文章会完整走一遍这个模型最重要的发现：粒子目录、动量结构、重整化群流，以及生成
-过程中的动力学。看完之后，你会对“一个 Intelliton 目录在实践中长什么样”有一个具体印象。
+- `I_0`、`I_1`、`I_2` 这些名字表示的是**反复出现的模式**，不是字面意义上的粒子
+- 物理词汇是对行为的压缩描述，不是说模型里藏着量子物质
+- 最重要的不是名字本身，而是每个模式在计算里扮演了什么角色
 
----
+在这里讨论的这份报告里，几个主导模式更像覆盖整段序列的大尺度结构，而不是只绑在某个
+token 上的一次性小波纹。它们的质量都偏轻，说明能跨很多层传播；它们的螺旋度代理量也相
+对稳定，说明这种方向性签名没有在层间被完全打散。
 
-## 这张目录是怎么做出来的
-
-分析从模型的 **残差流** 开始，也就是贯穿每一层的隐藏激活向量。对一组覆盖算术、事实回
-忆、逻辑推理、代词跟踪和句法一致性的基准提示词，代码会执行以下步骤：
-
-1. **捕获每一层、每一个 token 的残差激活**；
-2. **把激活数组视作 token-layer lattice 上的离散场**；
-3. **对 token 位置做傅里叶分析**，提取主导空间模态，也就是动量；
-4. **逐层做奇异值分解（SVD）**，找出主导的集体模式；
-5. **沿层方向拟合传播子**，为每个模式提取有效质量；
-6. **运行 EFT / RG 分析**，识别固定点层，并把模式分成 UV、IR 或 crossover；
-7. **跨提示词合并相似模式**，形成最终的物种目录。
-
-最终得到的是一张紧凑的表，也就是 Intelliton 目录。相对于模型数十亿原始参数，它用少得多
-的数字概括了内部的主导结构。
-
-![Qwen3-4B-Base particle table]({{ "/assets/images/Qwen3-4B-Base/particle_table.png" | relative_url }})
-*Qwen3-4B-Base 的 Intelliton 目录。共 6 个物种，每个都有质量、动量、类自旋分数、振幅、
-固定点层和任务偏好。*
+这已经很值得注意了：这些模式不是一闪而过的火花，而是可重复使用的内部载体。
 
 ---
 
-## 不是几百个物种，而是只有六个
+## 先把四列术语翻译成人话
 
-最令人惊讶的结果之一，是目录的紧凑程度。在这条分析管线上，`Qwen3-4B-Base` 最终只分解
-出 **6 个主导物种**：`I_0` 到 `I_5`。
+如果一张谱表看上去很抽象，就先把它压缩成四个问题。
 
-这并不意味着模型简单。它仍然有 40 亿参数和丰富的激活空间。但这意味着，大多数系统性、
-可重复出现的集体行为，实际上集中在少数几个主导模式上。就像复杂等离子体的许多现象，
-往往主要由少数主导等离激元模态描述一样。
+### 动量
 
-### 最领先的物种：`I_0`
+动量问的是：这个模式沿 token 位置是平滑的，还是快速振荡的？
 
-优势最大的物种是 `I_0`：
+- 低动量表示更全局、更平滑的序列模式
+- 高动量表示相邻 token 之间变化更快
 
-| 属性 | 数值 |
-|---|---|
-| 振幅 | **6167.1** |
-| 类自旋分数 | **1.84** |
-| 极点质量 | **0.1275** |
-| 格点质量 | **0.0083** |
-| 动量 | **π ≈ 3.14** |
-| 固定点层 | **16** |
-| 固定点类型 | **crossover** |
-| 活跃任务 | arithmetic, factual recall, logical reasoning |
+这份报告里，重要物种都更靠近低动量端，所以更合适的心智图像不是“某个 token 上的小机关”，
+而是“覆盖整个序列的大背景形状”。
 
-`I_0` 的振幅大约是其他任何物种的 30 倍，因此它可以被看作模型的主导 **骨干模态**。
+### 类自旋分数
 
-这些属性分别说明了什么？
+这不是字面意义上的自旋，更适合读成**内部复杂度**。
 
-**振幅（6167.1）** 表示这个模式被激活得非常强。模型处理提示词时，`I_0` 是最显著的集体
-激发。
+- 分数低，说明一个内部方向特别突出
+- 分数高，说明多个方向混在一起，结构更复杂
 
-**类自旋分数（1.84）** 衡量内部复杂度。接近 1 的值意味着模式较为简单、相干；更高则说
-明内部结构更丰富。`I_0` 处于一个中等水平：很强，但并非过度复杂。
+### 质量
 
-**极点质量（0.1275）** 表示这个模式跨层维持的难度。质量越低，传播越自由。`I_0` 相对较
-轻，这与它作为广泛存在、持续背景激发的角色相一致。
+质量说的是一个模式会不会随着层数加深而快速衰减。
 
-**位于 π 的动量** 也许是最意外的属性。对 token 方向做傅里叶分解时，`I_0` 在最高频率处
-达到峰值（k ≈ π）。这意味着它在相邻 token 之间呈现强烈交替，相当于整个序列上出现一种
-“棋盘格”式结构。下面还会回到这个点。
+- 轻模式能活很多层
+- 重模式很快消失
 
-**固定点层（16）和类型（crossover）** 则意味着，直到网络末端，`I_0` 仍未真正进入稳定的
-红外区间。它仍在过渡中，从头到尾都保持着明显的动态性与结构性。
+所以当报告说这些物种都偏轻，本质意思就是：它们不是浅层噪声，而是能一路传播到更深层的
+内部模式。
 
-### 次级物种：`I_1` 到 `I_5`
+### 螺旋度代理量
 
-其余五个物种振幅要弱得多，但也更专门化：
+这里的螺旋度，是传播方向和内部朝向结合起来的一个简化指标。
 
-| 物种 | 最强任务 | 动量 | 固定点类型 | 振幅 |
-|---|---|---|---|---|
-| `I_1` | logical reasoning | ~0 | IR | 204.3 |
-| `I_2` | arithmetic | ~0 | IR | 196.1 |
-| `I_3` | syntactic agreement | ~0 | IR | 188.5 |
-| `I_4` | pronoun tracking | ~0 | IR | 178.2 |
-| `I_5` | factual recall | ~0 | IR | 165.4 |
-
-这里有几点很突出。第一，每个次级物种都最强地对应一种 **不同的推理任务**。它并不是手工
-标注出来的分类，而是由“哪类提示词最强地激活哪个模式”自动涌现出的结果。物种与任务类型
-之间近似一一对应，本身就是非常有吸引力的结构现象。
-
-第二，所有次级物种都在 **接近零的动量** 处达到峰值。在 token 方向的傅里叶分解里，k ≈ 0
-对应随位置缓慢变化、全局存在的模式，这与在 k ≈ π 上交替振荡的骨干模态 `I_0` 恰好相反。
-
-第三，所有次级物种都被标记为 **IR**，也就是它们在后期层已经进入稳定、慢变化的配置。相
-比之下，`I_0` 还停留在 crossover 区间。
+- 稳定说明模式保留了可辨认的方向性签名
+- 不稳定说明这种签名被混掉了
 
 ---
 
-## 分裂的动量结构
+## `I_0`：最强的默认续写底座
 
-`I_0` 位于高动量（k ≈ π），而 `I_1` 到 `I_5` 位于低动量（k ≈ 0），这是数据里最有意思的
-结构特征之一。
+`I_0` 是最容易解释的一个物种，因为它既最强，也最简单。
 
-在 token 格点图像下：
+在这份报告里，它的振幅最大，而且在主导物种里类自旋复杂度最低。最直白的人话解释是：
 
-- **k ≈ 0 的模式** 随 token 位置变化缓慢，代表整个输入序列上较均匀、较全局的结构；
-- **k ≈ π 的模式** 则是最大程度的交替，类似一种“反铁磁”图样，相邻 token 贡献相位相反。
+> `I_0` 很像一个强背景模式，用来保证模型把句子继续往一个合理答案上推进。
 
-也就是说，模型似乎同时维持着两种性质截然不同的集体激发：
+它不像某条具体知识，更像一个**通用续写骨架**。当提示词是“如果所有狗都是动物……”或
+“7 + 8 等于多少？”这种形式时，`I_0` 看起来像是在把“答案槽位”撑开并稳定住的那股力。
 
-1. 一个覆盖整个序列、非常强的交替骨干模态；
-2. 一组更弱但更有语义局部性的任务敏感模态。
-
-这种分裂是否揭示了变换器如何沿 token 位置组织信息的深层规律，仍然是开放问题。但至少
-在这份数据里，它是一个可重复出现的发现。
-
-![Qwen3-4B-Base momentum and helicity]({{ "/assets/images/Qwen3-4B-Base/momentum_helicity_(pronoun_tracking).png" | relative_url }})
-*Qwen3-4B-Base 在代词跟踪任务上的动量与 helicity 结构。*
+如果硬要压缩成一句话，`I_0` 就像模型里那个“先让计算别跑偏”的总底座。
 
 ---
 
-## RG 视角：模型在什么地方“稳定下来”
+## `I_1`：安静但重要的结构支撑
 
-重整化群（RG）分析把模型层数视作一种尺度变换。早层更像“紫外”（细粒度、高频），晚层更
-像“红外”（粗粒度、趋于稳定）。
+`I_1` 更适合被读成支撑模式，而不是最显眼的决策按钮。
 
-对于 `Qwen3-4B-Base`，大多数次级物种（`I_1` 到 `I_5`）在 **第 13 层左右** 达到固定点，
-而 `I_0` 的固定点在 **第 16 层**。
+在干预式阅读里，改动 `I_1` 往往不会像改强因果模式那样，立刻把某个词换掉。这**不**代表它
+没用，更常见的解释是：它太基础、太基础设施化了，所以表面输出不一定马上剧烈变化。
 
-如果用普通神经网络语言来讲，就是：模型在中后段逐渐形成稳定的高层表示。次级、专门化的
-模式稍早组织完成；而主导骨干模态则更晚才接近稳定，一直保持动态活性。
+更合适的人话解释是：
 
-下面这些 EFT / RG 图展示了运行质量（模式“权重”随层如何变化）、beta 函数（变化率）以及
-相变图景。
+> `I_1` 像一个维持表示形状和系统稳定性的结构模式，让其他更任务化的模式在上面工作。
 
-![Qwen3-4B-Base RG flow]({{ "/assets/images/Qwen3-4B-Base/rg_flow.png" | relative_url }})
-*Qwen3-4B-Base 的 RG 流，展示各 Intelliton 物种如何随网络深度演化。*
-
-![Qwen3-4B-Base EFT parameters]({{ "/assets/images/Qwen3-4B-Base/eft_parameters.png" | relative_url }})
-*从 Qwen3-4B-Base 提取出的有效场论参数。*
+它更像脚手架，而不是舞台中央的主角。
 
 ---
 
-## 所有物种都属于“中质量”
+## `I_2`：带有人物指代偏向的引用解析模式
 
-目录里还有一个有趣之处：**六个物种全部被归为中质量**。既没有特别轻、几乎随处可传播的，
-也没有特别重、迅速衰减的。
+`I_2` 最好理解的场景，是这类代词提示词：
 
-这意味着 `Qwen3-4B-Base` 的主导集体模式处在一个相对窄的动力学带宽中。它们足够稳定，能
-跨层、跨提示词重复出现；但又保留足够弹性，能够参与多样任务。换句话说，这个模型似乎是
-围绕一组中等稳健的激发组织起来的，而不是围绕一套僵硬冻结的结构。
+> “Alice gave Bob a book. He thanked her for ...”
 
-![Qwen3-4B-Base mass spectrum]({{ "/assets/images/Qwen3-4B-Base/mass_spectrum_(pronoun_tracking).png" | relative_url }})
-*Qwen3-4B-Base 在代词跟踪任务上的质量谱。*
+在这份报告里，放大 `I_2` 会把输出往更偏人物、偏男性代词解释的方向推。这让它不像一个通
+用语言模式，而更像一条**指代选择通道**。
 
----
+更通俗地说：
 
-## 色散关系：模式如何传播
+> `I_2` 看起来会帮助模型决定，这句话现在到底在跟踪哪一个“人”。
 
-色散关系描述的是，一个模式的能量（或有效频率）如何随动量变化。在自由场理论里，它常常
-是一条简单抛物线；在更复杂系统里，形状则会丰富得多。
-
-对于 `Qwen3-4B-Base`，色散关系表现出典型的离散格点模式行为，而主导模式沿着一条很有特征
-的曲线分布，进一步确认它确实属于高动量模式。
-
-![Qwen3-4B-Base dispersion relation]({{ "/assets/images/Qwen3-4B-Base/dispersion_relation.png" | relative_url }})
-*Qwen3-4B-Base 的格点色散关系。*
+这并不意味着它是一个字面意义上的“男性代词粒子”。更稳妥的理解是：在这个探针设置里，只
+要模型需要把混杂的语篇上下文压缩成一个明确先行词，`I_2` 就会稳定参与进来。
 
 ---
 
-## 自旋谱：不同任务的内部复杂度
+## `I_3`：更高复杂度的混合协调模式
 
-类自旋分数衡量每个模式内部自由度的复杂程度。跨任务观察自旋谱，可以看出哪些任务需要更
-复杂的内部激发。
+`I_3` 不像一个单用途按钮，更像一个负责混合多种约束的协调模式。
 
-在代词跟踪提示词上，`Qwen3-4B-Base` 的自旋谱在 `I_0` 位置出现明显峰值，而且复杂度处于中
-等区间，这与骨干模态保持适度但稳定的内部结构是一致的。
+它的类自旋复杂度更高，说明它不是沿着一条干净轴工作，而是由几个同样重要的内部方向共同
+构成。这往往出现在模型需要同时维持多个约束的提示词里。
 
-![Qwen3-4B-Base spin spectrum]({{ "/assets/images/Qwen3-4B-Base/spin_spectrum_(pronoun_tracking).png" | relative_url }})
-*Qwen3-4B-Base 在代词跟踪任务上的类自旋分数谱。*
+更合适的人话解释是：
 
----
+> `I_3` 像是在把几条半成品约束揉成一个可用内部状态的模式。
 
-## 相变：网络内部的重组节点
-
-相变分析会寻找那些激活结构发生定性变化的层，也就是有效自由度发生重组的位置。
-
-对 `Qwen3-4B-Base` 而言，相变图确认了主要重组出现在中后层（大约第 13 到 16 层），与 RG
-固定点分析高度一致。
-
-![Qwen3-4B-Base phase transitions]({{ "/assets/images/Qwen3-4B-Base/phase_transitions.png" | relative_url }})
-*Qwen3-4B-Base 的相变图。*
+所以与其把它想成直接拍板某个 token 的按钮，不如把它想成中间层里保持复杂推理或结构理解
+不散架的那台“混合器”。
 
 ---
 
-## 用直白语言总结这张目录
+## `I_4`：与 `I_2` 互补的另一条指代模式
 
-把上面的结果放在一起，`Qwen3-4B-Base` 的 Intelliton 目录讲出了一个相当连贯的故事：
+`I_4` 和 `I_2` 有相似之处，但在代词类场景里又带着不同的方向偏好。
 
-1. 模型维持着一个非常强、在整个序列上交替振荡的骨干激发 `I_0`，几乎对所有任务都活跃；
-2. 在这条骨干之上，模型再运行五个更弱、也更任务专门化的模式，它们分别大致对应不同类型
-   的推理；
-3. 任务专门化模式更早组织完成（约第 13 层），而骨干模式则更晚才接近稳定（约第 16 层）；
-4. 所有模式都属于“中质量”，也就是稳定但不僵硬；
-5. 主导模式在 token 方向表现为高频交替，任务专门化模式则更偏向全局均匀。
+在这份报告里，放大 `I_4` 会把输出往 `her` 这类形式推，而不是中性或其他续写。更通俗的读
+法是：
 
-对于一个拥有 40 亿参数的系统来说，这是一个相当有结构的内部图景。下一篇文章会展示：当
-模型扩大到 8B，或者经过指令微调之后，这种结构会发生怎样的变化。
+> `I_4` 也是一个对指代敏感的模式，只是它和 `I_2` 在“当前到底在说谁”这个问题上，代表了
+> 不同的语篇落点。
+
+这点很重要，因为它说明“代词跟踪”不是一个整块技能。模型可以把这项工作拆成几条彼此相近、
+但又不完全相同的内部模式。
 
 ---
 
-## 延伸阅读
+## 把整张谱表压成一段话
 
-- 继续阅读 [第 3 篇：用 Intelliton 视角看规模扩展与对齐]({% post_url 2026-04-03-scaling-alignment-intellitons %})
-- 继续阅读 [第 4 篇：把幻觉理解为内部不稳定性]({% post_url 2026-04-04-intellitons-and-hallucination %})
+把 `I_0` 到 `I_4` 合起来看，故事其实很连贯：
+
+- `I_0` 是强而通用的背景底座
+- `I_1` 负责稳住结构
+- `I_2` 和 `I_4` 更明显地参与指代选择
+- `I_3` 更像复杂约束的混合模式
+
+这就是 Intelliton 视角的价值。它把一大片难以直视的隐藏状态，压缩成一组反复出现的“角色分工”。
+
+---
+
+## 哪些地方不要过度解读
+
+这里有两个很重要的保留意见。
+
+1. 物种编号只是记账标签。一次运行里的 `I_2`，不保证永远和另一次运行里的 `I_2` 完全等价。
+2. 动量、自旋、螺旋度这些词都是代理量。它们是在组织证据，不是在证明网络里真的有字面意
+   义上的粒子。
+
+最稳妥的读法是：这些标签在帮我们总结反复出现的激活角色。
+
+---
+
+## 继续阅读
+
+- [为什么不同提示词会点亮不同 Intelliton 模式]({% post_url 2026-04-05-why-different-prompts-light-up-different-intellitons %})
+- [用 Intelliton 视角看规模扩展与对齐]({% post_url 2026-04-03-scaling-alignment-intellitons %})
 
 </div>
