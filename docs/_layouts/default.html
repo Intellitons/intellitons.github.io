@@ -16,6 +16,7 @@
     {% seo %}
     {% feed_meta %}
     <script defer src="{{ '/assets/js/lang-toggle.js' | relative_url }}"></script>
+    <noscript><style>[data-lang="en"]{display:block}[data-lang="zh"]{display:none}</style></noscript>
   </head>
   <body class="site-shell" data-page-title-en="{{ page.title | default: site.title | escape }}" data-page-title-zh="{{ page.title_zh | default: site.title_zh | default: page.title | escape }}">
     <div class="site-backdrop"></div>
