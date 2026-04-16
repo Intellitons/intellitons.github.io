@@ -6,8 +6,8 @@ description: >-
   excitation modes discovered inside large language models.
 description_zh: >-
   面向大众的 Intellitons（智子）科普博客，介绍大语言模型内部类似准粒子的集体激发模式。
-baseurl: "/"
-url: "https://Intellitons.github.io"
+baseurl: ""
+url: "https://intellitons.wiki"
 lang: en
 locale: en_US
 logo: "/assets/icons/android-chrome-512x512.png"
@@ -39,6 +39,9 @@ plugins:
   - jekyll-feed
   - jekyll-seo-tag
   - jekyll-sitemap
+
+include:
+  - CNAME
 
 future: true
 
