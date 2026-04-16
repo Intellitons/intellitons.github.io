@@ -1,20 +1,20 @@
 {
-  "name": "Intelliton Blog",
+  "name": "Intellitons Blog",
   "short_name": "Intelliton",
   "description": "Bilingual GitHub Pages blog about Intellitons inside large language models.",
-  "start_url": "/Intelliton/",
-  "scope": "/Intelliton/",
+  "start_url": "/",
+  "scope": "/",
   "display": "standalone",
   "background_color": "#07111d",
   "theme_color": "#07111d",
   "icons": [
     {
-      "src": "/Intelliton/assets/icons/android-chrome-192x192.png",
+      "src": "/assets/icons/android-chrome-192x192.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "/Intelliton/assets/icons/android-chrome-512x512.png",
+      "src": "/assets/icons/android-chrome-512x512.png",
       "sizes": "512x512",
       "type": "image/png"
     }

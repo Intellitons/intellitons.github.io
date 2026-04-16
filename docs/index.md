@@ -2,13 +2,14 @@
 layout: home
 title: Intelliton Blog
 title_zh: Intellitons (智子) 博客
+description: Bilingual popular-science articles about Intellitons, model internals, alignment, and residual-stream spectral analysis.
+description_zh: 关于 Intelliton、模型内部机理、对齐与残差流谱分析的中英双语科普文章。
 ---
 
 <div data-lang="en" markdown="1">
 
 # A bilingual field guide to Intellitons
 
-generation steps.
 Welcome to the **Intellitons Blog**. This GitHub Pages site turns the project’s research outputs
 into readable popular-science essays about a bold claim: large language models may contain stable,
 recurrent collective modes that can be tracked across layers, prompts, and generation steps.
