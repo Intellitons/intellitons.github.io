@@ -1,5 +1,6 @@
 title: Intellitons Blog
 title_zh: Intellitons（智子）博客
+tagline: Spectral essays on collective modes inside large language models
 description: >-
   Popular science articles about Intellitons — the quasi-particle-like collective
   excitation modes discovered inside large language models.
@@ -8,8 +9,21 @@ description_zh: >-
 baseurl: "/"
 url: "https://Intellitons.github.io"
 lang: en
+locale: en_US
 logo: "/assets/icons/android-chrome-512x512.png"
 image: "/assets/icons/android-chrome-512x512.png"
+repository: xiongzhp/Intelliton
+
+social:
+  name: Intellitons Project
+  links:
+    - https://github.com/xiongzhp/Intelliton
+
+twitter:
+  card: summary_large_image
+
+# Set this to your GA4 Measurement ID, for example G-XXXXXXXXXX.
+google_analytics_id: G-BMF6JP5HTX
 
 theme: minima
 
@@ -24,6 +38,7 @@ minima:
 plugins:
   - jekyll-feed
   - jekyll-seo-tag
+  - jekyll-sitemap
 
 future: true
 
@@ -33,3 +48,14 @@ highlighter: rouge
 kramdown:
   math_engine: mathjax
   parse_block_html: true
+
+defaults:
+  - scope:
+      path: ""
+    values:
+      image: "/assets/icons/android-chrome-512x512.png"
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      author: Intellitons Project
